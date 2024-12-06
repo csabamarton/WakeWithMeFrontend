@@ -1,79 +1,89 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# WakeWithMe Frontend
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Project Description
+WakeWithMe is a social alarm clock application that allows users to share wake-up messages and music. This repository contains the frontend codebase for the WakeWithMe application, which is built using React Native.
 
-## Step 1: Start the Metro Server
+The backend API for the WakeWithMe project is hosted in a separate repository, which can be found at: [WakeWithMe API](https://github.com/csabamarton/wakewithme-api)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Features
+- User authentication (registration and login)
+- Setting up alarms with personalized wake-up messages
+- Sharing voice messages for friends' alarms
+- Using Spotify tracks as alarm sounds
+- Managing friend connections
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Tech Stack
+- **React Native** for building the mobile application
+- **Redux** for state management
+- **React Navigation** for navigation
+- **Axios** for making API requests
+- **AsyncStorage** for local data storage
 
-```bash
-# using npm
-npm start
+## Project Setup
 
-# OR using Yarn
-yarn start
+### Prerequisites
+- Node.js 18.18.2 LTS or higher
+- React Native CLI
+- Android Studio or Xcode (depending on your target platform)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/wakewithme-frontend.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd wakewithme-frontend
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the React Native packager:
+   ```bash
+   npx react-native start
+   ```
+
+5. In a separate terminal, run the app on an emulator or connected device:
+   ```bash
+   npx react-native run-android
+   ```
+   or
+   ```bash
+   npx react-native run-ios
+   ```
+
+   Make sure the backend API is running at the correct URL (`http://10.0.2.2:8080/api` for Android emulator, `http://localhost:8080/api` for iOS simulator, or your machine's IP address for physical devices).
+
+## Project Structure
+The project follows a standard React Native folder structure:
+```
+src/
+├── api/
+├── components/
+├── navigation/
+├── screens/
+├── store/
+└── types/
 ```
 
-## Step 2: Start your Application
+- **api/**: Contains the API client for communicating with the backend.
+- **components/**: Reusable UI components used throughout the application.
+- **navigation/**: Defines the app's navigation structure using React Navigation.
+- **screens/**: Contains the main screens of the application.
+- **store/**: Manages the application state using Redux.
+- **types/**: Defines the TypeScript types used in the project.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Available Scripts
+- `npm start`: Starts the React Native packager.
+- `npm run android`: Builds and runs the app on an Android device or emulator.
+- `npm run ios`: Builds and runs the app on an iOS device or simulator.
+- `npm run lint`: Runs the ESLint linter.
+- `npm test`: Runs the unit tests.
 
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
