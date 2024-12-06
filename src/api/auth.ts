@@ -1,6 +1,5 @@
-
 import axios from 'axios';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../types/auth.types';
+import {AuthResponse, LoginRequest, RegisterRequest} from '../types/auth.types';
 
 //const API_URL = 'http://localhost:8080/api';
 const API_URL = 'http://10.0.2.2:8080/api';
@@ -12,13 +11,13 @@ const API_URL = 'http://10.0.2.2:8080/api';
 // const API_URL = 'http://localhost:8080/api';
 
 export const authApi = {
-    login: async (data: LoginRequest): Promise<AuthResponse> => {
-        const response = await axios.post(`${API_URL}/auth/login`, data);
-        return response.data;
-    },
+  login: async (data: LoginRequest): Promise<AuthResponse> => {
+    const response = await axios.post(`${API_URL}/auth/login`, data);
+    return response.data;
+  },
 
-    register: async (data: RegisterRequest): Promise<AuthResponse> => {
-        const response = await axios.post(`${API_URL}/auth/register`, data);
-        return response.data;
-    }
+  register: async (data: RegisterRequest): Promise<AuthResponse> => {
+    const response = await axios.post(`${API_URL}/auth/register`, data);
+    return response.data;
+  },
 };
