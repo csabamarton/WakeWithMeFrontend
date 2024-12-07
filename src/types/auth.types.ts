@@ -1,6 +1,8 @@
 export interface User {
   id: string;
   email: string;
+  username: string;
+  phone: string;
   createdAt: string;
 }
 
@@ -11,17 +13,19 @@ export interface AuthState {
   error: string | null;
 }
 
-export interface LoginRequest {
+export type RegisterRequest = {
   email: string;
   password: string;
-}
+  username: string;
+  phone: string;
+};
 
-export interface RegisterRequest {
+export type LoginRequest = {
   email: string;
   password: string;
-}
+};
 
-export interface AuthResponse {
+export type AuthResponse = {
   token: string;
   user: User;
-}
+};
