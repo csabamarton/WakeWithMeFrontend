@@ -29,3 +29,26 @@ export type AuthResponse = {
   token: string;
   user: User;
 };
+
+export type AlarmRequest = {
+  datetime: string;
+  recurringDays: string; // JSON array as a string
+  isRecurring: boolean;
+  isEnabled: boolean;
+  label: string;
+  visibility: 'PRIVATE' | 'SHARED' | 'PUBLIC';
+  timezone: string;
+};
+
+export type AlarmResponse = {
+  id: string;
+  datetime: string;
+  recurringDays: string;
+  isRecurring: boolean;
+  isEnabled: boolean;
+  label: string;
+  visibility: 'PRIVATE' | 'SHARED' | 'PUBLIC';
+  timezone: string;
+  createdAt: string;
+  updatedAt: string;
+};
