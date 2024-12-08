@@ -24,11 +24,13 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
+      console.log('Redux setCredentials: User and token set', action.payload);
     },
     logout: state => {
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+      console.log('Redux logout: User and token cleared');
     },
   },
 });

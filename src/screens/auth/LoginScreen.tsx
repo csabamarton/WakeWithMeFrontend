@@ -24,24 +24,31 @@ const LoginScreen = ({ navigation }: NavigationProps) => {
     const handleLogin = async () => {
         try {
             setIsLoading(true);
+            console.log('Attempting login with email:', email); // Log the email
 
             // Call API
             const response = await authApi.login({email, password});
+            console.log('Login successful. Response:', response); // Log the response
 
             // Save token to AsyncStorage
             await AsyncStorage.setItem('token', response.token);
+            console.log('Token saved to AsyncStorage:', response.token); // Log the token
 
             // Dispatch to Redux
             dispatch(setCredentials({user: response.user, token: response.token}));
+            console.log('Redux state updated with user and token'); // Log Redux update
 
             // Navigate to Home
             navigation.navigate('Home');
+            console.log('Navigated to Home'); // Log navigation
         } catch (error) {
-            console.error('Login failed:', error.message);
+            console.error('Login failed:', error.message); // Log error message
         } finally {
             setIsLoading(false);
+            console.log('Login process completed'); // Log completion
         }
     };
+
 
     return (
         <KeyboardAvoidingView

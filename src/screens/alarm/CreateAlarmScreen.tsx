@@ -30,23 +30,28 @@ const CreateAlarmScreen = () => {
 
   const handleSaveAlarm = async () => {
     try {
+      console.log('Preparing to save alarm'); // Log start of process
       const alarmRequest = {
-        datetime: time.toISOString(), // Convert to ISO string for backend
-        recurringDays: JSON.stringify(days), // Convert to JSON string
-        isRecurring: days.some(day => day), // Check if any day is true
+        datetime: time.toISOString(),
+        recurringDays: JSON.stringify(days),
+        isRecurring: days.some(day => day),
         isEnabled: true,
         label,
-        visibility, // Already typed correctly
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Get the user's timezone
+        visibility,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       };
+
+      console.log('Alarm data prepared:', alarmRequest); // Log prepared data
 
       await alarmApi.createAlarm(alarmRequest);
 
+      console.log('Alarm saved successfully'); // Log successful save
       navigation.goBack();
     } catch (error) {
-      console.error('Failed to save alarm:', error);
+      console.error('Failed to save alarm:', error); // Log error
     }
   };
+
 
   return (
     <ScrollView style={styles.container}>

@@ -12,13 +12,9 @@ const API_URL = 'http://10.0.2.2:8080/api';
 
 export const authApi = {
   login: async (data: LoginRequest): Promise<AuthResponse> => {
+    console.log('Sending login request with data:', data); // Log request data
     const response = await axios.post<AuthResponse>(`${API_URL}/auth/login`, data);
-
-    // Validate the response structure
-    if (!response.data.token || !response.data.user) {
-      throw new Error('Invalid API response: Missing token or user');
-    }
-
+    console.log('Login API response:', response.data); // Log response data
     return response.data;
   },
   register: async (data: RegisterRequest): Promise<void> => {
@@ -32,15 +28,23 @@ export const authApi = {
 
 export const alarmApi = {
   createAlarm: async (data: AlarmRequest): Promise<void> => {
-    const state = store.getState() as RootState;
+    const state = store.getState() as RootState; // Access Redux state
     const token = state.auth.token;
+    const userId = state.auth.user?.id; // Retrieve userId from Redux state
 
-    if (!token) {
-      throw new Error('User is not authenticated');
+    if (!token || !userId) {
+      throw new Error('User is not authenticated or missing userId');
     }
 
-    await axios.post(`${API_URL}/alarms`, data, {
-      headers: {Authorization: `Bearer ${token}`},
+    const alarmRequest = {
+      ...data,
+      userId,
+    };
+
+    console.log('Sending alarm creation request with data:', alarmRequest);
+
+    await axios.post(`${API_URL}/alarms`, alarmRequest, {
+      headers: { Authorization: `Bearer ${token}` },
     });
   },
 };
