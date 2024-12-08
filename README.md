@@ -1,4 +1,3 @@
-
 # WakeWithMe Frontend
 
 ## Project Description
@@ -8,17 +7,48 @@ The backend API for the WakeWithMe project is hosted in a separate repository, w
 
 ## Features
 - User authentication (registration and login)
-- Setting up alarms with personalized wake-up messages
-- Sharing voice messages for friends' alarms
-- Using Spotify tracks as alarm sounds
-- Managing friend connections
+- Creating and managing alarms
+- Displaying alarms in a sorted list
+- Bottom navigation for navigation across the app (MVP phase)
+
+## Demo Video
+A demo video showcasing the current functionality of the WakeWithMe application 
+
+https://github.com/user-attachments/assets/1900b9e9-a8f4-498c-b5f2-5f643c39a5b0
+
+
+
+## MVP Phase
+The current MVP (Minimum Viable Product) phase includes the following functionality:
+1. **User Authentication**:
+   - Users can register and log in to the app.
+   - The app handles user credentials securely using Redux and AsyncStorage.
+
+2. **Alarm Management**:
+   - Users can create new alarms with specific times, labels, and visibility options.
+   - The app fetches alarms from the backend API and displays them on the home screen.
+   - Alarms are displayed in a sorted list by their date and time.
+
+3. **Home Screen**:
+   - The "Next Alarm" is highlighted at the top for better visibility.
+   - A profile button is available for future profile management integration.
+   - Bottom navigation provides a foundation for upcoming features like "Friends" and "Settings."
+
+4. **Navigation**:
+   - React Navigation is used to handle transitions between screens, including the Login, Create Alarm, and Home screens.
+
+### Known Issues:
+- **Sorting of Alarms**: Alarms are displayed but may not be perfectly sorted under all scenarios.
+- **Registration Flow**: After registration, the user is directly taken to the Home Screen without confirmation.
+- **Profile Display**: The Profile button currently doesn't display the user's name.
+- **Recurring Alarms**: Recurring alarms are not yet implemented and will be addressed in future phases.
 
 ## Tech Stack
-- **React Native** for building the mobile application
-- **Redux** for state management
-- **React Navigation** for navigation
-- **Axios** for making API requests
-- **AsyncStorage** for local data storage
+- **React Native** for building the mobile application.
+- **Redux** for state management.
+- **React Navigation** for navigation.
+- **Axios** for making API requests.
+- **AsyncStorage** for local data storage.
 
 ## Project Setup
 
