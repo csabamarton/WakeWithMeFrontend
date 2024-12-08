@@ -3,7 +3,7 @@ import {
   AuthResponse,
   LoginRequest,
   RegisterRequest,
-  AlarmRequest,
+  AlarmRequest, AlarmResponse,
 } from '../types/auth.types';
 import {RootState, store} from '../store';
 import {setCredentials} from '../store/slices/authSlice';
@@ -46,5 +46,23 @@ export const alarmApi = {
     await axios.post(`${API_URL}/alarms`, alarmRequest, {
       headers: { Authorization: `Bearer ${token}` },
     });
+  },
+  getAlarmsByUserId: async (userId: string): Promise<AlarmResponse[]> => {
+    const state = store.getState() as RootState;
+    const token = state.auth.token;
+
+    if (!token) {
+      throw new Error('User is not authenticated');
+    }
+
+    console.log('Fetching alarms for userId:', userId);
+
+    const response = await axios.get<AlarmResponse[]>(`${API_URL}/alarms/user/${userId}`, {
+      headers: {Authorization: `Bearer ${token}`},
+    });
+
+    console.log('Fetched alarms:', response.data);
+
+    return response.data;
   },
 };

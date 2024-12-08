@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {useNavigation} from '@react-navigation/native';
 import {alarmApi} from '../../api/auth.ts';
 import {AlarmRequest} from '../../types/auth.types.ts';
@@ -25,8 +26,10 @@ const CreateAlarmScreen = () => {
   ]);
   const [label, setLabel] = useState('');
   const [visibility, setVisibility] = useState<'PRIVATE' | 'SHARED' | 'PUBLIC'>(
-    'PRIVATE',
+      'PRIVATE',
   ); // Type-safe visibility
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleSaveAlarm = async () => {
     try {
@@ -52,81 +55,134 @@ const CreateAlarmScreen = () => {
     }
   };
 
+  const handleDateChange = (event: any, selectedDate?: Date) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      const updatedDate = new Date(time);
+      updatedDate.setFullYear(selectedDate.getFullYear());
+      updatedDate.setMonth(selectedDate.getMonth());
+      updatedDate.setDate(selectedDate.getDate());
+      setTime(updatedDate);
+    }
+  };
+
+  const handleTimeChange = (event: any, selectedTime?: Date) => {
+    setShowTimePicker(false);
+    if (selectedTime) {
+      const updatedTime = new Date(time);
+      updatedTime.setHours(selectedTime.getHours());
+      updatedTime.setMinutes(selectedTime.getMinutes());
+      setTime(updatedTime);
+    }
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Create New Alarm</Text>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Create New Alarm</Text>
 
-      {/* Time Picker */}
-      <View style={styles.timeContainer}>
-        <Text style={styles.timeText}>
-          {time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
-        </Text>
-      </View>
+        {/* Date Picker */}
+        <TouchableOpacity
+            style={styles.pickerButton}
+            onPress={() => setShowDatePicker(true)}>
+          <Text style={styles.pickerButtonText}>
+            {time.toLocaleDateString()}
+          </Text>
+        </TouchableOpacity>
+        {showDatePicker && (
+            <DateTimePicker
+                value={time}
+                mode="date"
+                display="default"
+                onChange={handleDateChange}
+            />
+        )}
 
-      {/* Repeat Days */}
-      <View style={styles.daysContainer}>
-        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.dayButton, days[index] && styles.dayButtonSelected]}
-            onPress={() => {
-              const newDays = [...days];
-              newDays[index] = !newDays[index];
-              setDays(newDays);
-            }}>
-            <Text
-              style={[styles.dayText, days[index] && styles.dayTextSelected]}>
-              {day}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+        {/* Time Picker */}
+        <TouchableOpacity
+            style={styles.pickerButton}
+            onPress={() => setShowTimePicker(true)}>
+          <Text style={styles.pickerButtonText}>
+            {time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+          </Text>
+        </TouchableOpacity>
+        {showTimePicker && (
+            <DateTimePicker
+                value={time}
+                mode="time"
+                display="default"
+                onChange={handleTimeChange}
+            />
+        )}
 
-      {/* Label Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Alarm Label"
-        value={label}
-        onChangeText={setLabel}
-      />
+        {/* Repeat Days */}
+        <View style={styles.daysContainer}>
+          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+              <TouchableOpacity
+                  key={index}
+                  style={[styles.dayButton, days[index] && styles.dayButtonSelected]}
+                  onPress={() => {
+                    const newDays = [...days];
+                    newDays[index] = !newDays[index];
+                    setDays(newDays);
+                  }}>
+                <Text
+                    style={[styles.dayText, days[index] && styles.dayTextSelected]}>
+                  {day}
+                </Text>
+              </TouchableOpacity>
+          ))}
+        </View>
 
-      {/* Visibility Options */}
-      <View style={styles.visibilityContainer}>
-        {['PRIVATE', 'SHARED', 'PUBLIC'].map(option => (
-          <TouchableOpacity
-            key={option}
-            style={[
-              styles.visibilityButton,
-              visibility === option && styles.visibilityButtonSelected,
-            ]}
-            onPress={() =>
-              setVisibility(option as 'PRIVATE' | 'SHARED' | 'PUBLIC')
-            }>
-            <Text
-              style={[
-                styles.visibilityText,
-                visibility === option && styles.visibilityTextSelected,
-              ]}>
-              {option}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+        {/* Label Input */}
+        <TextInput
+            style={styles.input}
+            placeholder="Alarm Label"
+            value={label}
+            onChangeText={setLabel}
+        />
 
-      {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton} onPress={handleSaveAlarm}>
-        <Text style={styles.saveButtonText}>Save Alarm</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {/* Visibility Options */}
+        <View style={styles.visibilityContainer}>
+          {['PRIVATE', 'SHARED', 'PUBLIC'].map(option => (
+              <TouchableOpacity
+                  key={option}
+                  style={[
+                    styles.visibilityButton,
+                    visibility === option && styles.visibilityButtonSelected,
+                  ]}
+                  onPress={() =>
+                      setVisibility(option as 'PRIVATE' | 'SHARED' | 'PUBLIC')
+                  }>
+                <Text
+                    style={[
+                      styles.visibilityText,
+                      visibility === option && styles.visibilityTextSelected,
+                    ]}>
+                  {option}
+                </Text>
+              </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Save Button */}
+        <TouchableOpacity style={styles.saveButton} onPress={handleSaveAlarm}>
+          <Text style={styles.saveButtonText}>Save Alarm</Text>
+        </TouchableOpacity>
+      </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {flex: 1, padding: 20},
   title: {fontSize: 24, fontWeight: 'bold', marginBottom: 30},
-  timeContainer: {alignItems: 'center', marginBottom: 30},
-  timeText: {fontSize: 48, fontWeight: 'bold', color: '#007AFF'},
+  pickerButton: {
+    backgroundColor: '#f0f0f0',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  pickerButtonText: {fontSize: 16, color: '#007AFF'},
   daysContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
