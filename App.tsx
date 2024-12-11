@@ -9,6 +9,7 @@ import HomeScreen from './src/screens/home/HomeScreen';
 import CreateAlarmScreen from './src/screens/alarm/CreateAlarmScreen';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import type { RootStackParamList } from './src/types/navigation.types';
+import LandingScreen from "./src/screens/auth/LandingScreen.tsx";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,7 +17,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Landing">
+          <Stack.Screen name="Landing" component={LandingScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
