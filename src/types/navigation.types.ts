@@ -7,6 +7,8 @@ export type RootStackParamList = {
   Home: undefined;
   CreateAlarm: undefined;
   Profile: undefined;
+  EditProfile: undefined;
+  ChangePassword: undefined;
 };
 
 export type NavigationProps = {
