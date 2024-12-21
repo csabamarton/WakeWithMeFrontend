@@ -10,6 +10,7 @@ import CreateAlarmScreen from './src/screens/alarm/CreateAlarmScreen';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import type { RootStackParamList } from './src/types/navigation.types';
 import LandingScreen from "./src/screens/auth/LandingScreen.tsx";
+import EditProfileScreen from './src/screens/profile/EditProfile.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,6 +25,7 @@ const App = () => {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="CreateAlarm" component={CreateAlarmScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

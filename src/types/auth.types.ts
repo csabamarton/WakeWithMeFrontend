@@ -25,6 +25,11 @@ export type LoginRequest = {
   password: string;
 };
 
+export interface UpdateUserRequest {
+  username: string;
+  phone: string;
+}
+
 export type AuthResponse = {
   token: string;
   user: User;

@@ -4,6 +4,8 @@ import {
   LoginRequest,
   RegisterRequest,
   AlarmRequest, AlarmResponse,
+  UpdateUserRequest,
+  User
 } from '../types/auth.types';
 import {RootState, store} from '../store';
 import {setCredentials} from '../store/slices/authSlice';
@@ -23,6 +25,24 @@ export const authApi = {
 
     // Dispatch to Redux
     store.dispatch(setCredentials({user, token}));
+  },
+  updateUser: async (userId: string, data: UpdateUserRequest): Promise<void> => {
+    const state = store.getState() as RootState; // Access Redux state
+    const token = state.auth.token;
+
+    if (!token) {
+      throw new Error('User is not authenticated');
+    }
+
+    console.log('Sending user update request with data:', data);
+    
+    const response = await axios.put<User>(`${API_URL}/users/${userId}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    console.log('User updated successfully:', response.data);
+    
+    store.dispatch(setCredentials({ user: response.data, token }));
   },
 };
 
