@@ -10,7 +10,9 @@ import {
 import {RootState, store} from '../store';
 import {setCredentials} from '../store/slices/authSlice';
 
-const API_URL = 'http://10.0.2.2:8080/api';
+//const API_URL = 'http://10.0.2.2:8080/api';
+//const API_URL = 'http://192.168.0.252:8080/api';
+const API_URL = 'http://52.57.7.144:8080/api';
 
 export const authApi = {
   login: async (data: LoginRequest): Promise<AuthResponse> => {
@@ -35,13 +37,13 @@ export const authApi = {
     }
 
     console.log('Sending user update request with data:', data);
-    
+
     const response = await axios.put<User>(`${API_URL}/users/${userId}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     console.log('User updated successfully:', response.data);
-    
+
     store.dispatch(setCredentials({ user: response.data, token }));
   },
 };
