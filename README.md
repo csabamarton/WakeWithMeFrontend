@@ -14,8 +14,7 @@ The backend API for the WakeWithMe project is hosted in a separate repository, w
 ## Demo Video
 A demo video showcasing the current functionality of the WakeWithMe application 
 
-https://github.com/user-attachments/assets/1900b9e9-a8f4-498c-b5f2-5f643c39a5b0
-
+https://github.com/user-attachments/assets/ff6c79bf-37a5-405a-ad96-f0024f3e957b
 
 
 ## MVP Phase
